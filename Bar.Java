@@ -27,13 +27,7 @@ public class Bar implements Comparable<Bar> {
 
     // Compare two bars by value.
     public int compareTo(Bar that){
-        if(this.getCategory() == that.getCategory()){
-            if(this.getValue() >= that.getValue()){
-                return this.getValue();
-            }
-            return that.getValue();
-        }
-        return -1;
+        return Integer.compare(that.value, this.value); 
     }
 
 }
