@@ -1,28 +1,54 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 public class BarChartRunner {
-   public static void main(String[] args) {
+   public static void main(String[] args){
+
+      //create the scanner
+      try {
+        File inputFile = new File("GameOfThrones.txt");
+        Scanner sc = new Scanner(inputFile);
+
       // create the bar chart
-      String title = "The 10 most populous cities";
-      String xAxis = "Population (thousands)";
-      String source = "Source: United Nations";
+      String title = sc.nextLine();
+      String xAxis = sc.nextLine();
+      String source = sc.nextLine();
       BarChart chart = new BarChart(title, xAxis, source);
       chart.setCaption("2018");
 
       // add the bars to the bar chart
-      chart.add("Tokyo",       38194, "East Asia");
-      chart.add("Delhi",       27890, "South Asia");
-      chart.add("Shanghai",    25779, "East Asia");
-      chart.add("Beijing",     22674, "East Asia");
-      chart.add("Mumbai",      22120, "South Asia");
-      chart.add("São Paulo",   21698, "Latin America");
-      chart.add("Mexico City", 21520, "Latin America");
-      chart.add("Osaka",       20409, "East Asia");
-      chart.add("Cairo",       19850, "Middle East");
-      chart.add("Dhaka",       19633, "South Asia");
+         while(sc.hasNextLine()){
+            //count
+            String countLine = sc.nextLine().trim();
+            if(countLine.isEmpty()) continue;
+            int numLines = Integer.parseInt(countLine);
 
-      // draw the bar chart
-      StdDraw.setCanvasSize(1000, 700);
-      StdDraw.enableDoubleBuffering();
-      chart.draw();
-      StdDraw.show();
+
+            for (int i = 0; i < numLines && sc.hasNextLine(); i++) {
+               String characterLine = sc.nextLine();
+               String[] parts = characterLine.split(",");
+
+               if (parts.length < 5) {
+                  System.out.println("Skipping malformed line: " + characterLine);
+                  continue;
+               }          
+
+               String name = parts[1];
+               int value = Integer.parseInt(parts[3]);
+               String group = parts[2];
+
+               chart.add(name, value, group);
+            }
+         }
+         // draw the bar chart
+         StdDraw.setCanvasSize(1000, 700);
+         StdDraw.enableDoubleBuffering();
+         chart.draw();
+         StdDraw.show();
+      }
+      catch (FileNotFoundException e) {
+         System.out.println("File not found: " + e.getMessage());
+    }
    }
 }

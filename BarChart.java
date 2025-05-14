@@ -44,7 +44,7 @@ public class BarChart {
       this.title = title;
       this.xAxisLabel = xAxisLabel;
       this.dataSource = dataSource;
-      colorOf = new TreeMap<String, Color>();
+      colorOf = new TreeMap<>();
       reset();
    }
 
