@@ -16,7 +16,6 @@ public class BarChartRunner {
       String xAxis = sc.nextLine();
       String source = sc.nextLine();
       BarChart chart = new BarChart(title, xAxis, source);
-      chart.setCaption("Scene#"); // needs to be changed to dynamic, or I need to find both the start and the end. 
 
       // add the bars to the bar chart
          while(sc.hasNextLine()){
@@ -34,7 +33,7 @@ public class BarChartRunner {
                   System.out.println("Skipping malformed line: " + characterLine);
                   continue;
                }          
-
+               chart.setCaption(parts[0]); // needs to be changed to dynamic, or I need to find both the start and the end. 
                String name = parts[1];
                String value = parts[3];
                int val = Integer.parseInt(parts[3]);
@@ -56,6 +55,8 @@ public class BarChartRunner {
          StdDraw.enableDoubleBuffering();
          chart.draw();
          StdDraw.show();
+         StdDraw.pause(50);
+         chart.reset();
       }
       catch (FileNotFoundException e) {
          System.out.println("File not found: " + e.getMessage());
