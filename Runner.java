@@ -1,29 +1,28 @@
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class BarChartRunner {
-   public static void main(String[] args){
+public class Runner {
+    private String title; 
+    private String xAxis;
+    private String source;
+    private BarChart chart;
+    private Scanner userIn;
+    private Scanner sc;
 
-      //create the scanner
-      try {
-        File inputFile = new File("GameOfThrones.txt"); // input file
-        Scanner sc = new Scanner(inputFile);
+    public Runner(String title, String xAxis, String source, BarChart chart, Scanner userIn, Scanner sc){
+        this.title = title;
+        this.xAxis = xAxis;
+        this.source = source;
+        this.chart = chart;
+        this.userIn = userIn;
+        this.sc = sc;
+    }
 
-      // create the bar chart
-      String title = sc.nextLine();
-      String xAxis = sc.nextLine();
-      String source = sc.nextLine();
-      BarChart chart = new BarChart(title, xAxis, source);
+    public void createChart(){
+    }
 
-
-        // draw the bar chart
-      StdDraw.setCanvasSize(1000, 700);
-      StdDraw.enableDoubleBuffering();
-
-      // add the bars to the bar chart
-         while(sc.hasNextLine()){
+    public void runScript(){
+        while(sc.hasNextLine()){
             //count
             String countLine = sc.nextLine().trim();
             if(countLine.isEmpty()) continue;
@@ -57,12 +56,8 @@ public class BarChartRunner {
             StdDraw.clear();
             chart.draw();
             StdDraw.show();
-            StdDraw.pause(50);   // brief pause to animate
+            StdDraw.pause(5);   // brief pause to animate
             chart.reset(); 
          }
       }
-      catch (FileNotFoundException e) {
-         System.out.println("File not found: " + e.getMessage());
-    }
-   }
 }
