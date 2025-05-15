@@ -17,6 +17,11 @@ public class BarChartRunner {
       String source = sc.nextLine();
       BarChart chart = new BarChart(title, xAxis, source);
 
+
+        // draw the bar chart
+      StdDraw.setCanvasSize(1000, 700);
+      StdDraw.enableDoubleBuffering();
+
       // add the bars to the bar chart
          while(sc.hasNextLine()){
             //count
@@ -49,14 +54,12 @@ public class BarChartRunner {
                Bar b = bars.get(i);
                chart.add(b.getName(), b.getValue(), b.getCategory());
             }  
+            StdDraw.clear();
+            chart.draw();
+            StdDraw.show();
+            StdDraw.pause(50);   // brief pause to animate
+            chart.reset(); 
          }
-         // draw the bar chart
-         StdDraw.setCanvasSize(1000, 700);
-         StdDraw.enableDoubleBuffering();
-         chart.draw();
-         StdDraw.show();
-         StdDraw.pause(50);
-         chart.reset();
       }
       catch (FileNotFoundException e) {
          System.out.println("File not found: " + e.getMessage());
