@@ -17,7 +17,7 @@ public class Main {
          String source = sc.nextLine();
          BarChart chart = new BarChart(title, xAxis, source);
          
-         Runner charecter = new Runner(title, xAxis, source, chart, userIn, sc);
+         Runner charecter = new Runner(chart, userIn, sc);
 
          // draw the bar chart
          StdDraw.setCanvasSize(1000, 700);
