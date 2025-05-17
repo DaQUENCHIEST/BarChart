@@ -5,7 +5,6 @@ public class Runner {
     private BarChart chart;
     private Scanner userIn;
     private Scanner sc;
-    private int numLines;
     private String countLine;
 
     public Runner(BarChart chart, Scanner userIn, Scanner sc){
@@ -14,44 +13,18 @@ public class Runner {
         this.sc = sc;
     }
 
-    public void runScript(){
-        while(sc.hasNextLine()){
-            ArrayList <Bar> bars = new ArrayList<>(); // initalizies the list of bar objects.
-
-            //counts the lines and skips all the lines that don't have text
-            countLine = sc.nextLine().trim();
-            if(countLine.isEmpty()){
-                continue;
-            } 
-
-            numLines = Integer.parseInt(countLine);
-            createBar(bars);
-
-            bars.sort((a, b) -> b.getValue() - a.getValue());
-
-            for (int i = 0; i < Math.min(10, bars.size()); i++) {
-               Bar b = bars.get(i);
-               chart.add(b.getName(), b.getValue(), b.getCategory());
-            }  
-            StdDraw.clear();
-            chart.draw();
-            StdDraw.show();
-            StdDraw.pause(5); // brief pause to animate
-            chart.reset(); 
-         }
-      }
-
-    public String quirySearch(){ // the search for a specific charecter
-        System.out.println("Would you like search a charecter?");
+    public String quirySearch(){ // the search for a specific character
+        System.out.println("Would you like search a character?");
         String yesNo = userIn.nextLine();
+        System.out.println(":)");
         if(yesNo.toLowerCase().equals("yes")){
-            System.out.println("Chose a Charecter");
+            System.out.println("Chose a character");
             return userIn.nextLine();
         }
         return "";
     }
 
-    public void createBar(ArrayList<Bar> bars){
+    public void createBar(ArrayList<Bar> bars, int numLines){ // the class responsible for creating individual bar objects
       for (int i = 0; i < numLines && sc.hasNextLine(); i++) {
             String characterLine = sc.nextLine();
             String[] parts = characterLine.split(",");
@@ -67,5 +40,14 @@ public class Runner {
 
             bars.add(new Bar(name, val, group)); // adds the information taken from the txt file to the list
         }
+    }
+
+    public void sorting(ArrayList<Bar> bars){
+        bars.sort((a, b) -> b.getValue() - a.getValue());
+
+        for (int i = 0; i < Math.min(10, bars.size()); i++) {
+            Bar b = bars.get(i);
+            chart.add(b.getName(), b.getValue(), b.getCategory());
+        }  
     }
 }

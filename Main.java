@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -17,16 +18,34 @@ public class Main {
          String source = sc.nextLine();
          BarChart chart = new BarChart(title, xAxis, source);
          
-         Runner charecter = new Runner(chart, userIn, sc);
+         Runner runner = new Runner(chart, userIn, sc); // instantiates the runner class which handles the much of the logic
 
          // draw the bar chart
          StdDraw.setCanvasSize(1000, 700);
          StdDraw.enableDoubleBuffering();
+         
+         runner.quirySearch();
+         while(sc.hasNextLine()){
+            ArrayList <Bar> bars = new ArrayList<>(); // initalizies the list of bar objects.
+            
+            String countLine = sc.nextLine().trim();
+            if(countLine.isEmpty()){
+                continue;
+            } 
 
-         charecter.runScript();
+            int numLines = Integer.parseInt(countLine);
+            runner.createBar(bars, numLines); // runs the class that creates the bars;
+            runner.sorting(bars);
+
+            StdDraw.clear();
+            chart.draw();
+            StdDraw.show();
+            StdDraw.pause(5); // brief pause to animate
+            chart.reset(); 
+         }
+      }
+      catch (FileNotFoundException e) { // the catch exception if the scanner cannot find the file
+         System.out.println("File not found: " + e.getMessage());
+      }
    }
-   catch (FileNotFoundException e) {
-      System.out.println("File not found: " + e.getMessage());
- }
-}
 }
