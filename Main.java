@@ -8,7 +8,7 @@ public class Main {
 
       //create the scanner
       try {
-        File inputFile = new File("GameOfThrones.txt"); // input file
+        File inputFile = new File("endgame.txt"); // input file
         Scanner sc = new Scanner(inputFile); //scanner for text file
         Scanner userIn = new Scanner(System.in); // scanner for user input
 
@@ -35,11 +35,11 @@ public class Main {
             try {
                int numLines = Integer.parseInt(countLine);
                runner.createBar(bars, numLines, quiry); // runs the class that creates the bars;
-               runner.sorting(bars);
+               runner.sorting(bars); // sorts the bars 
 
-               StdDraw.clear();
                chart.draw();
                StdDraw.show();
+               StdDraw.clear();
                StdDraw.pause(5); // brief pause to animate
                chart.reset(); 
             } catch (NumberFormatException e) {

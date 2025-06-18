@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Runner {
+    //these varibles are used. I have no idea what VS is doing
     private BarChart chart;
     private Scanner userIn;
     private Scanner sc;
